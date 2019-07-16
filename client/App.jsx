@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getPhotos } from './redux/actions';
 
 class App extends Component {
   constructor(props) {
@@ -15,4 +18,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    state: state.photosReducer
+  }
+}
+
+export default connect(mapStateToProps, { getPhotos })(App);

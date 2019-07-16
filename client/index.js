@@ -6,9 +6,12 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import './scss/main.scss';
+import reducers from './redux';
+const { photosReducer } = reducers;
 const rootReducer = combineReducers({
-  
+  photosReducer
 });
+
 const logger = createLogger();
 
 const store = createStore(
