@@ -12,12 +12,12 @@ export const photosReducer = (state=InitialState, action={}) => {
   switch(action.type) {
     case GET_PHOTOS:
       return Object.assign({}, state, {
-        photos: action.payload.data,
+        photos: action.payload,
         searching: false
       });
     case GET_PHOTOS_PENDING:
       return Object.assign({}, state, {
-        photos: action.payload.data,
+        photos: [],
         searching: true
       });
     default:

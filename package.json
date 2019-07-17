@@ -61,6 +61,7 @@
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-infinite-scroll-component": "^4.5.2",
     "react-redux": "^7.1.0",
     "redux": "^4.0.3",
     "redux-logger": "^3.0.6",
