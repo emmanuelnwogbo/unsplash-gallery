@@ -11,6 +11,84 @@ $color-white: #fff;
   border-radius: 1rem;
   cursor: pointer;
   background: $color-fade;
+  overflow: hidden;
+
+  @media only screen and (max-width: 37.5em) {
+    width: 100%;
+    height: 40rem;
+    margin: 1rem 0;
+  }
+
+  &:hover {
+
+    & > .photo__text {
+      transform: translateY(0);
+    }
+    
+    & figure img {
+      transform: scale(1.2)
+    }
+  }
+
+  &:nth-child(1) {
+
+    @media only screen and (max-width: 77.5em) {
+      grid-column: span 6;
+      width: 94rem;
+      height: 62rem;
+      grid-row: span 4;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      width: 100%;
+      height: 40rem;
+      margin: 1rem 0;
+    }
+  }
+
+  &:nth-child(2) {
+    grid-column: span 6;
+    width: 94rem;
+    height: 62rem;
+    grid-row: span 4;
+
+    @media only screen and (max-width: 77.5em) {
+      width: 30rem;
+      height: 30rem;
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      width: 100%;
+      height: 40rem;
+      margin: 1rem 0;
+    }
+  }
+
+  &:nth-child(6) {
+    width: 62rem;
+    grid-column: span 4;
+    height: 62rem;
+    grid-row: span 4;
+
+    @media only screen and (max-width: 37.5em) {
+      width: 100%;
+      height: 40rem;
+      margin: 1rem 0;
+    }
+  }
+
+  &:nth-child(15) {
+    height: 61rem;
+    grid-row: span 4;
+
+    @media only screen and (max-width: 37.5em) {
+      width: 100%;
+      height: 40rem;
+      margin: 1rem 0;
+    }
+  }
 
   &__text {
     font-weight: 400;
@@ -20,13 +98,15 @@ $color-white: #fff;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 27%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
-    padding-left: 2rem;
-    justify-content: center;
+    padding: 2rem;
+    justify-content: flex-start;
     color: #fff;
+    transition: all .2s ease-in;  
     flex-direction: column;
+    transform: translateY(70%);
   }
 
   & figure {

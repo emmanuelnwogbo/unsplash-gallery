@@ -1,9 +1,11 @@
 import {
   photosReducer,
-  photoView
+  photoView,
+  search
 } from './reducers';
 
 export default {
   photosReducer,
-  photoView
+  photoView,
+  search
 }

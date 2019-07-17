@@ -2,7 +2,7 @@ import React, { Suspense, lazy, Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { connect } from 'react-redux';
 
-import { getPhotos } from './redux/actions';
+import { getPhotos, setSearchTerm } from './redux/actions';
 import './scss/components/app.scss'
 
 const Photo = lazy(() => import('./components/Photo'));
@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       count: 30,
       start: 1,
-      photos: []
+      photos: [],
+      searchTerm: null
     }
   }
 
@@ -34,7 +35,27 @@ class App extends Component {
     })
   }
 
+  returnSearching = () => {
+    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    return items.map(item => {
+      return (
+        <div className={'photo'} key={item}></div>
+      )
+    })
+  }
+
   getMorePhotos = () => {
+    if (this.state.searchTerm !== null) {
+      if (this.state.photos.length === this.props.state.total) {
+        return;
+      }
+      return this.setState(prevState => {
+        return {
+          start: prevState.start + prevState.count
+        }
+      }, () => this.props.setSearchTerm(this.state.count, this.state.start));
+    }
+
     this.setState(prevState => {
       return {
         start: prevState.start + prevState.count
@@ -42,12 +63,32 @@ class App extends Component {
     }, () => this.props.getPhotos(this.state.count, this.state.start));
   }
 
+  handleSearch = (e) => {
+    if (event.key === 'Enter') {
+      console.log(event.target.value);
+      this.setState({
+        photos: [],
+        count: 30,
+        start: 1,
+        searchTerm: event.target.value
+      }, () => {
+        console.log(this.state, 'after enter click');
+        this.props.setSearchTerm(this.state.searchTerm, this.state.count, this.state.start)
+      })
+    }
+  }
+
   componentDidMount() {
+    console.log(this.props, 'these are app props check here')
     window.scrollTo(0, 0)
     const { count, start } = this.state;
     this.props.getPhotos(count, start);
     document.querySelector('.app__grid').parentElement.style.overflow = 'hidden';
-    document.querySelector('.app__grid').parentElement.style.transform = `translateY(-6rem)`
+    document.querySelector('.app__grid').parentElement.style.transform = `translateY(-5rem)`;
+
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      document.querySelector('.app__grid').parentElement.style.transform = `translateY(-2rem)`;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,12 +107,17 @@ class App extends Component {
       <div className={'app'}>
         {!this.props.state.modal_closed ? <PhotoView /> : <div></div>}
         <div className={'app__search'}>
-          <span className={'app__search--svg'}>
-            <svg>
-              <use xlinkHref="./imgs/sprite.svg#icon-magnifying-glass"/>
-            </svg>
-          </span>
-          <input placeholder={'Search for photo'} className={'app__search--input'}/>
+          {this.props.search_state.searchwordsShown ? <div className={'app__search--topic'}><p>{this.props.search_state.searching ? 'Searching for' : `${this.props.state.total} Results for`} <span>{`${`"${this.props.search_state.searchTerm}"`}`}</span></p></div> : <span></span>}
+          <div className={'app__search__inputarea'}>
+            <span className={'app__search__inputarea--svg'}>
+              <svg>
+                <use xlinkHref="./imgs/sprite.svg#icon-magnifying-glass"/>
+              </svg>
+            </span>
+            <input placeholder={'Search for photo'} 
+              className={'app__search__inputarea--input'}
+              onKeyDown={this.handleSearch}/>
+          </div>
         </div>
         <InfiniteScroll 
           dataLength={this.state.photos.length}
@@ -79,14 +125,10 @@ class App extends Component {
           hasMore={true}
           loader={
             <div className={'app__loader'}>
-              <span>
-                <svg>
-                  <use xlinkHref="./imgs/sprite.svg#icon-spinner10"/>
-                </svg> 
-              </span>
+              <div className={'app__loader--spinner'}></div>
             </div>
           }>
-            <div className={'app__grid'}>{this.returnPhotos()}</div>
+            <div className={'app__grid'}>{this.props.search_state.searching ? this.returnSearching() : this.returnPhotos()}</div>
         </InfiniteScroll>
       </div>
     )
@@ -95,8 +137,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    state: state.photosReducer
+    state: state.photosReducer,
+    search_state: state.search
   }
 }
 
-export default connect(mapStateToProps, { getPhotos })(App);
+export default connect(mapStateToProps, { getPhotos, setSearchTerm })(App);

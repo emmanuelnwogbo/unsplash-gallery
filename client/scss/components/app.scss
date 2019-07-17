@@ -17,55 +17,88 @@ $color-fade: #dfe6e9;
   padding: 3rem;
   position: relative;
 
+  @media only screen and (max-width: 37.5em) {
+    padding: 1rem;
+  }
+
   &__search {
     position: relative;
     padding: 3rem 1rem;
     background: $color-fade;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    height: 27rem;
     width: 95vw;
     margin: 0 auto;
+    height: 30vh;
 
-    &--svg {
-      position: absolute;
-      top: 0;
-      left: 6%;
-      height: 100%;
-      width: 3rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    @media only screen and (max-width: 37.5em) {
+      width: 96vw;
+      transform: translateX(-.3rem);
+    }
 
-      & svg {
-        height: 3rem;
-        width: 3rem;
-        fill: rgba($color-black, .1);
+    &--topic {
+      text-align: left;
+      width: 90%;
+      color: rgba(52, 31, 151,1.0);
+      font-size: 3rem;
+      padding: 1rem 0;
+      font-weight: 700;
+
+      @media only screen and (max-width: 37.5em) {
+        font-size: 2rem;
+      }
+
+      & span {
+        color: rgba(52, 31, 151,.7);
       }
     }
 
-    &--input {
-      font-size: 2rem;
-      font-family: inherit;
-      color: inherit;
-      padding: 1.5rem 2rem;
-      padding-left: 5rem;
-      border-radius: 1rem;
-      background-color: rgba($color-white, .5);
-      border: none;
-      border-bottom: 3px solid transparent;
+    &__inputarea {
+      position: relative;
       width: 90%;
-      display: block;
-      transition: all .3s;
-      outline: none;
-      box-shadow: 0 1rem 2rem rgba($color-black, .4);
       height: 6rem;
 
-      &::-webkit-input-placeholder {
-        color: rgba($color-black, .7);
-        transform: translateX(.5rem)
+      &--svg {
+        position: absolute;
+        top: 0;
+        left: 1%;
+        height: 100%;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        & svg {
+          height: 3rem;
+          width: 3rem;
+          fill: rgba($color-black, .1);
+        }
+      }
+
+      &--input {
+        font-size: 2rem;
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        padding-left: 5rem;
+        border-radius: 1rem;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 100%;
+        display: block;
+        transition: all .3s;
+        outline: none;
+        box-shadow: 0 1rem 2rem rgba($color-black, .4);
+        height: 100%;
+  
+        &::-webkit-input-placeholder {
+          color: rgba($color-black, .7);
+          transform: translateX(.5rem)
+        }
       }
     }
   }
@@ -77,23 +110,37 @@ $color-fade: #dfe6e9;
     grid-gap: 1rem;
     min-height: 100vh;
     justify-content: center;
+
+    @media only screen and (max-width: 37.5em) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__loader {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem 0;
 
-    & span {
-      display: block;
+    &--spinner {
+      position: relative;
+      width: 7.3rem;
+      height: 7.3rem;
 
-      & svg {
-        height: 6rem;
-        width: 6rem;
-        fill: rgba($color-black, .7);
-        transition: all 1s ease-in;
-        animation: spin 1s linear 1s infinite;
+      &::before {
+        content: '';
+        width: 7.3rem;
+        height: 7.3rem;
+        border-radius: 50%;
+        border: .5rem solid #fff;
+        border-color: #fff #fff #fff #000000;
+        transition: all .3s ease-in;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: spin .3s linear .3s infinite;
       }
     }
   }
