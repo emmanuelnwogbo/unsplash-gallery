@@ -1,2 +1,4 @@
 export const GET_PHOTOS = 'GET_PHOTOS';
 export const GET_PHOTOS_PENDING = 'GET_PHOTOS';
+export const OPEN_PHOTO_MODAL = 'OPEN_PHOTO_MODAL';
+export const CLOSE_PHOTO_MODAL = 'CLOSE_PHOTO_MODAL';

@@ -15,6 +15,7 @@ $color-fade: #dfe6e9;
 
 .app {
   padding: 3rem;
+  position: relative;
 
   &__search {
     position: relative;
@@ -51,7 +52,7 @@ $color-fade: #dfe6e9;
       color: inherit;
       padding: 1.5rem 2rem;
       padding-left: 5rem;
-      border-radius: 2px;
+      border-radius: 1rem;
       background-color: rgba($color-white, .5);
       border: none;
       border-bottom: 3px solid transparent;

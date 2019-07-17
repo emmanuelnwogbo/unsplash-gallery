@@ -1,11 +1,12 @@
 import React, { Suspense, lazy, Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 import { connect } from 'react-redux';
+
 import { getPhotos } from './redux/actions';
 import './scss/components/app.scss'
 
 const Photo = lazy(() => import('./components/Photo'));
+import PhotoView from './components/PhotoView';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class App extends Component {
     let rando = 0;
     return this.state.photos.map(photo => {
       rando+=1;
-      console.log(photo.user.name, photo.user.location)
       return (
         <Suspense fallback={<div className={'photo'}></div>} key={rando}>
           <Photo 
@@ -64,6 +64,7 @@ class App extends Component {
   render() {
     return (
       <div className={'app'}>
+        {!this.props.state.modal_closed ? <PhotoView /> : <div></div>}
         <div className={'app__search'}>
           <span className={'app__search--svg'}>
             <svg>

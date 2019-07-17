@@ -7,9 +7,10 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import reducers from './redux';
-const { photosReducer } = reducers;
+const { photosReducer, photoView } = reducers;
 const rootReducer = combineReducers({
-  photosReducer
+  photosReducer,
+  photoView
 });
 
 const logger = createLogger();
