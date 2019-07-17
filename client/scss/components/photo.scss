@@ -1,10 +1,39 @@
+$color-black: #000;
+$color-fade: #dfe6e9;
+$color-white: #fff;
+
 .photo {
+  position: relative;
+  width: 30rem;
+  height: 30rem;
+  grid-column: span 2;
+  grid-row: span 2;
+  border-radius: 1rem;
+  cursor: pointer;
+  background: $color-fade;
+
+  &__text {
+    font-weight: 400;
+    font-size: 1.2rem;
+    position: absolute;
+    z-index: 4;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 27%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    padding-left: 2rem;
+    justify-content: center;
+    color: #fff;
+    flex-direction: column;
+  }
 
   & figure {
-    height: 20rem;
-    width: 20rem;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
-    margin: 2rem;
+    border-radius: 1rem;
 
     & img {
       width: 100%;

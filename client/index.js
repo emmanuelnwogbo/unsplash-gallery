@@ -1,3 +1,4 @@
+import './scss/main.scss';
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
@@ -5,7 +6,6 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-import './scss/main.scss';
 import reducers from './redux';
 const { photosReducer } = reducers;
 const rootReducer = combineReducers({

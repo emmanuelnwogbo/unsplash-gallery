@@ -21,9 +21,14 @@ class App extends Component {
     let rando = 0;
     return this.state.photos.map(photo => {
       rando+=1;
+      console.log(photo.user.name, photo.user.location)
       return (
-        <Suspense fallback={<div>wait</div>} key={rando}>
-          <Photo url={photo.urls.regular}/>
+        <Suspense fallback={<div className={'photo'}></div>} key={rando}>
+          <Photo 
+            url={photo.urls.regular}
+            fullname={photo.user.name !== null ? `${photo.user.name}` : ''}
+            location={photo.user.location !== null ? `${photo.user.location}` : ''}
+            openUrl={photo.urls.full}/>
         </Suspense>
       )
     })
@@ -38,8 +43,11 @@ class App extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     const { count, start } = this.state;
     this.props.getPhotos(count, start);
+    document.querySelector('.app__grid').parentElement.style.overflow = 'hidden';
+    document.querySelector('.app__grid').parentElement.style.transform = `translateY(-6rem)`
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,12 +64,28 @@ class App extends Component {
   render() {
     return (
       <div className={'app'}>
+        <div className={'app__search'}>
+          <span className={'app__search--svg'}>
+            <svg>
+              <use xlinkHref="./imgs/sprite.svg#icon-magnifying-glass"/>
+            </svg>
+          </span>
+          <input placeholder={'Search for photo'} className={'app__search--input'}/>
+        </div>
         <InfiniteScroll 
           dataLength={this.state.photos.length}
           next={this.getMorePhotos}
           hasMore={true}
-          loader={<p>loading...</p>}>
-            {this.returnPhotos()}
+          loader={
+            <div className={'app__loader'}>
+              <span>
+                <svg>
+                  <use xlinkHref="./imgs/sprite.svg#icon-spinner10"/>
+                </svg> 
+              </span>
+            </div>
+          }>
+            <div className={'app__grid'}>{this.returnPhotos()}</div>
         </InfiniteScroll>
       </div>
     )
