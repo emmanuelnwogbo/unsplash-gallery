@@ -8,7 +8,7 @@ import {
   GET_PHOTOS_SEARCH_PENDING
 } from './constants';
 
-const baseUri = process.env.BASE_URI || `http://localhost:5000`
+const baseUri = `https://mysterious-gorge-83246.herokuapp.com` || `http://localhost:5000`
 
 export const getPhotos = (count, start) => dispatch => {
   fetch(`${baseUri}/api/photos?count=${count}&start=${start}`)
