@@ -52,6 +52,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "react-hot-loader": "^4.12.10",
     "@babel/runtime": "^7.4.4",
     "babel-register": "^6.26.0",
     "concurrently": "^4.1.1",
