@@ -12,7 +12,7 @@
     "dev:start-server": "nodemon server/server.js --exec babel-node",
     "dev:start-client": "webpack-dev-server --hot --mode development",
     "start:prod": "node server/server.js",
-    "build-server": "babel ./server/server --out-dir dist"
+    "build-server": "babel server/server.js --out-dir dist"
   },
   "repository": {
     "type": "git",
